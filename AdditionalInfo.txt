@@ -1,0 +1,19 @@
+1. Run api: dotnet run, rest info from console, test in postman
+2. Create account using ManagmentStudio. 
+- appName
+- password (use keePass)
+- do not enforce password policy
+- server roles: sysadmin
+3. EntityFrameworkCore nugets
+- dotnet add package Microsoft.EntityFrameworkCore
+- dotnet add package Microsoft.EntityFrameworkCore.Design
+- dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+4. dotnet ef (unicorn shows, this checks if ef tools installed)
+if not installed
+- dotnet tool install --global dotnet-ef
+5. Add migration
+- dotnet ef migrations add Initial
+6. Remove mistake
+- dotnet ef migrations remove
+6. Create db
+- dotnet ef database update
