@@ -8,6 +8,7 @@ builder.Services.AddDbContext<CommanderContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("CommanderConnection")));
 builder.Services.AddScoped<ITestCommanderRepo, MockCommanderRepo>();
+builder.Services.AddScoped<ICommanderRepo, SqlCommanderRepo>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
