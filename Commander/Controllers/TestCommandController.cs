@@ -16,7 +16,13 @@ namespace Commander.Controllers;
 [ApiController]
 public class TestCommandController : ControllerBase
 {
-	private readonly MockCommanderRepo repo = new MockCommanderRepo();
+	private readonly ITestCommanderRepo repo;
+
+	public TestCommandController(
+		ITestCommanderRepo repo)
+	{
+		this.repo = repo;
+	}
 
 	//GET api/testcommands
 	[HttpGet]
