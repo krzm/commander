@@ -15,9 +15,9 @@ if not installed
 - dotnet ef migrations add Initial
 6. Remove mistake
 - dotnet ef migrations remove
-6. Create db
+7. Create db
 - dotnet ef database update
-7. Example data
+8. Example data
 - Id = 1 
 - HowTo = How to create migrations
 - Line = dotnet ef migrations add <Name of Migration>
@@ -26,3 +26,7 @@ if not installed
 - HowTo = How to run migrations
 - Line = dotnet ef database update
 - Platform = EF Core
+9. DTOs
+Use models for client instead of db models.
+So contract with client is separate from internal implementation.
+-Internal model/ External model DTOs.

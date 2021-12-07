@@ -16,17 +16,17 @@ namespace Commander.Controllers;
 [ApiController]
 public class TestCommandController : ControllerBase
 {
-	private readonly ITestCommanderRepo repo;
+	private readonly IMockCommanderRepo repo;
 
 	public TestCommandController(
-		ITestCommanderRepo repo)
+		IMockCommanderRepo repo)
 	{
 		this.repo = repo;
 	}
 
 	//GET api/testcommands
 	[HttpGet]
-	public ActionResult<IEnumerable<Command>> GetAllCommands()
+	public ActionResult<IEnumerable<Command>> GetCommands()
 	{
 		return Ok(repo.GetCommands());
 	}
