@@ -32,7 +32,7 @@ public class SqlCommanderRepo : ICommanderRepo
 
 	public void UpdateCommand(Command cmd)
 	{
-		//Nothing
+		//Nothing in ef core
 	}
 
 	public void DeleteCommand(Command cmd)

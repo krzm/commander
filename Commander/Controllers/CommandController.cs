@@ -3,6 +3,7 @@ using AutoMapper;
 using Commander.Data;
 using Commander.Dtos;
 using Commander.Models;
+using Microsoft.AspNetCore.JsonPatch;
 //using Commander.Models;
 //using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -58,62 +59,66 @@ public class CommandController : ControllerBase
 		return CreatedAtRoute(nameof(GetCommandById), new {Id = commandReadDto.Id}, commandReadDto);
 	}
 
-	// //PUT api/commands/{id}
-	// [HttpPut("{id}")]
-	// public ActionResult UpdateCommand(int id, CommandUpdateDto commandUpdateDto)
-	// {
-	// 	var commandModel = repo.GetCommandById(id);
-	// 	if(commandModel == null)
-	// 	{
-	// 		return NotFound();
-	// 	}
-	// 	mapper.Map(commandUpdateDto, commandModel);
+	//PUT api/commands/{id}
+	[HttpPut("{id}")]
+	public ActionResult UpdateCommand(
+		int id
+		, CommandUpdateDto commandUpdateDto)
+	{
+		var commandModel = repo.GetCommandById(id);
+		if(commandModel == null)
+		{
+			return NotFound();
+		}
+		mapper.Map(commandUpdateDto, commandModel);
 		
-	// 	repo.UpdateCommand(commandModel);
+		repo.UpdateCommand(commandModel);
 
-	// 	repo.SaveChanges();
+		repo.SaveChanges();
 
-	// 	return NoContent();
-	// }
+		return NoContent();
+	}
 
-	// //PATCH api/commands/{id}
-	// [HttpPatch("{id}")]
-	// public ActionResult PartialCommandUpdate(int id, JsonPatchDocument<CommandUpdateDto> patchDoc)
-	// {
-	// 	var commandModel = repo.GetCommandById(id);
-	// 	if(commandModel == null)
-	// 	{
-	// 		return NotFound();
-	// 	}
+	//PATCH api/commands/{id}
+	[HttpPatch("{id}")]
+	public ActionResult PartialCommandUpdate(
+		int id
+		, JsonPatchDocument<CommandUpdateDto> patchDoc)
+	{
+		var commandModel = repo.GetCommandById(id);
+		if(commandModel == null)
+		{
+			return NotFound();
+		}
 
-	// 	var commandToPatch = mapper.Map<CommandUpdateDto>(commandModel);
-	// 	patchDoc.ApplyTo(commandToPatch, ModelState);
+		var commandToPatch = mapper.Map<CommandUpdateDto>(commandModel);
+		patchDoc.ApplyTo(commandToPatch, ModelState);
 
-	// 	if(!TryValidateModel(commandToPatch))
-	// 	{
-	// 		return ValidationProblem(ModelState);
-	// 	}
+		if(!TryValidateModel(commandToPatch))
+		{
+			return ValidationProblem(ModelState);
+		}
 
-	// 	mapper.Map(commandToPatch, commandModel);
+		mapper.Map(commandToPatch, commandModel);
 
-	// 	repo.UpdateCommand(commandModel);
+		repo.UpdateCommand(commandModel);
 
-	// 	repo.SaveChanges();
+		repo.SaveChanges();
 
-	// 	return NoContent();
-	// }
+		return NoContent();
+	}
 
-	// //DELETE api/commands/{id}
-	// [HttpDelete("{id}")]
-	// public ActionResult DeleteCommand(int id)
-	// {
-	// 	var commandModel = repo.GetCommandById(id);
-	// 	if(commandModel == null)
-	// 	{
-	// 		return NotFound();
-	// 	}
-	// 	repo.DeleteCommand(commandModel);
-	// 	repo.SaveChanges();
-	// 	return NoContent();
-	// }
+	//DELETE api/commands/{id}
+	[HttpDelete("{id}")]
+	public ActionResult DeleteCommand(int id)
+	{
+		var commandModel = repo.GetCommandById(id);
+		if(commandModel == null)
+		{
+			return NotFound();
+		}
+		repo.DeleteCommand(commandModel);
+		repo.SaveChanges();
+		return NoContent();
+	}
 }

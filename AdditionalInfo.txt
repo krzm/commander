@@ -41,3 +41,34 @@ Test Create in postman
     "line": "dotnet run",
     "platform": ".NET Core CLI"
 }
+11. Annotations on CommandCreateDto
+will provide much better error info in postman.
+12.
+PATCH
+can do 6 operations for ex.
+{
+    "op": "replace",
+    "path": "/howto",
+    "value": "Some new value"
+}
+{
+    "op": "test",
+    "path": "/line",
+    "value": "dotnet run"
+}
+13.
+For patch nugets needed:
+dotnet add package Microsoft.AspNetCore.JsonPatch
+dotnet add package Microsoft.AspNetCore.Mvc.NewtonsoftJson
+14.
+To test patch in postman: ([]-can add many ops)
+-body
+-josn
+[
+{
+    "op": "replace",
+    "path": "/howto",
+    "value": "Some new value"
+}
+]
+-patch
