@@ -30,3 +30,14 @@ if not installed
 Use models for client instead of db models.
 So contract with client is separate from internal implementation.
 -Internal model/ External model DTOs.
+10.
+Test Create in postman
+-Post
+-body
+-json
+-
+{
+    "howTo": "Run a .NET Core app",
+    "line": "dotnet run",
+    "platform": ".NET Core CLI"
+}

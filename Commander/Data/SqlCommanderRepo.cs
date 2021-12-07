@@ -1,51 +1,50 @@
 using Commander.Models;
 
-namespace Commander.Data
+namespace Commander.Data;
+
+public class SqlCommanderRepo : ICommanderRepo
 {
-    public class SqlCommanderRepo : ICommanderRepo
+	private readonly CommanderContext context;
+
+	public SqlCommanderRepo(
+		CommanderContext context)
 	{
-		private readonly CommanderContext context;
+		this.context = context;
+	}
 
-		public SqlCommanderRepo(
-			CommanderContext context)
-		{
-			this.context = context;
-		}
+	public IEnumerable<Command> GetCommands()
+	{
+		return context.Commands.ToList();
+	}
 
-		public IEnumerable<Command> GetCommands()
-		{
-			return context.Commands.ToList();
-		}
+	public Command GetCommandById(int id)
+	{
+		return context.Commands.FirstOrDefault(c => c.Id == id);
+	}
 
-		public Command GetCommandById(int id)
-		{
-			return context.Commands.FirstOrDefault(c => c.Id == id);
-		}
+	public void CreateCommand(Command cmd)
+	{
+		if (cmd == null)
+			throw new ArgumentNullException(nameof(cmd));
 
-		public bool SaveChanges()
-		{
-			return context.SaveChanges() >= 0;
-		}
+		context.Commands.Add(cmd);
+	}
 
-		public void CreateCommand(Command cmd)
-		{
-			if (cmd == null)
-				throw new ArgumentNullException(nameof(cmd));
+	public void UpdateCommand(Command cmd)
+	{
+		//Nothing
+	}
 
-			context.Commands.Add(cmd);
-		}
+	public void DeleteCommand(Command cmd)
+	{
+		if (cmd == null)
+			throw new ArgumentNullException(nameof(cmd));
 
-		public void UpdateCommand(Command cmd)
-		{
-			//Nothing
-		}
+		context.Commands.Remove(cmd);
+	}
 
-		public void DeleteCommand(Command cmd)
-		{
-			if (cmd == null)
-				throw new ArgumentNullException(nameof(cmd));
-
-			context.Commands.Remove(cmd);
-		}
+	public bool SaveChanges()
+	{
+		return (context.SaveChanges() >= 0);
 	}
 }

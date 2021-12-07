@@ -2,6 +2,7 @@
 using AutoMapper;
 using Commander.Data;
 using Commander.Dtos;
+using Commander.Models;
 //using Commander.Models;
 //using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -44,18 +45,18 @@ public class CommandController : ControllerBase
 		return NotFound();
 	}
 
-	// //POST api/commands
-	// [HttpPost]
-	// public ActionResult<CommandReadDto> CreateCommand(CommandCreateDto commandCreateDto)
-	// {
-	// 	var commandModel = mapper.Map<Command>(commandCreateDto);
-	// 	repo.CreateCommand(commandModel);
-	// 	repo.SaveChanges();
+	//POST api/commands
+	[HttpPost]
+	public ActionResult<CommandReadDto> CreateCommand(CommandCreateDto commandCreateDto)
+	{
+		var commandModel = mapper.Map<Command>(commandCreateDto);
+		repo.CreateCommand(commandModel);
+		repo.SaveChanges();
 
-	// 	var commandReadDto = mapper.Map<CommandReadDto>(commandModel);
+		var commandReadDto = mapper.Map<CommandReadDto>(commandModel);
 
-	// 	return CreatedAtRoute(nameof(GetCommandById), new {Id = commandReadDto.Id}, commandReadDto);
-	// }
+		return CreatedAtRoute(nameof(GetCommandById), new {Id = commandReadDto.Id}, commandReadDto);
+	}
 
 	// //PUT api/commands/{id}
 	// [HttpPut("{id}")]
