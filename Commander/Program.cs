@@ -18,9 +18,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.WebHost.UseUrls(
     "http://*:5000"
-    , "https://*:5001"
-    , "http://*:5027"
-    , "https://*:7052"
     );
 builder.WebHost.UseContentRoot(Directory.GetCurrentDirectory());
 var app = builder.Build();
