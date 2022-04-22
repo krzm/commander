@@ -14,19 +14,22 @@ public class SqlCommanderRepo : ICommanderRepo
 
 	public IEnumerable<Command> GetCommands()
 	{
+        ArgumentNullException.ThrowIfNull(context.Commands);
 		return context.Commands.ToList();
 	}
 
 	public Command GetCommandById(int id)
 	{
-		return context.Commands.FirstOrDefault(c => c.Id == id);
+        ArgumentNullException.ThrowIfNull(context.Commands);
+        var command = context.Commands.FirstOrDefault(c => c.Id == id);
+		return command ?? new Command{  };
 	}
 
 	public void CreateCommand(Command cmd)
 	{
 		if (cmd == null)
 			throw new ArgumentNullException(nameof(cmd));
-
+        ArgumentNullException.ThrowIfNull(context.Commands);
 		context.Commands.Add(cmd);
 	}
 
@@ -39,7 +42,7 @@ public class SqlCommanderRepo : ICommanderRepo
 	{
 		if (cmd == null)
 			throw new ArgumentNullException(nameof(cmd));
-
+        ArgumentNullException.ThrowIfNull(context.Commands);
 		context.Commands.Remove(cmd);
 	}
 
